@@ -35,23 +35,26 @@ const Manager = () => {
 
                 <input placeholder='Name' className='rounded-full border border-blue-500 w-full p-4 py-1' type="text" name="" id="" /> 
 
-                    <div className="flex w-full justify-between gap-6">
+                    <div className="flex w-full gap-6">
 
-                        <input placeholder='Description (optional)' className='rounded-full border border-blue-500 w-full p-4 py-1' type="text" name="" id="" />
+                        <input placeholder='Description (optional)' className='rounded-full border border-blue-500 flex-1 p-4 py-1' type="text" name="" id="" />
 
-                        <div className="relative">
+                        <div className="flex items-center gap-4 flex-shrink-0">
 
-                            <input placeholder='Enter your Password' className='rounded-full border border-blue-500 w-full p-4 py-1' type="text" name="" id="" />
+                            <div className="relative">
+                                <input placeholder='Enter your Password' className='rounded-full border border-blue-500 w-full p-4 py-1' type="text" name="" id="" />
 
-                            <span className='absolute right-[3px] top-[4px] cursor-pointer' onClick={showPassword}>
-                                <img ref={ref} className='p-1' width={27} src='eye.png' alt="eye"/>
-                            </span>
+                                <span className='absolute right-[3px] top-[4px] cursor-pointer' onClick={showPassword}>
+                                    <img ref={ref} className='p-1' width={27} src='eye.png' alt="eye"/>
+                                </span>
+                            </div>
+
+                            <button className='flex text-white justify-center items-center gap-2 bg-orange-400 hover:bg-orange-300 rounded-full px-4 py-2 w-fit border-2 border-blue-200'>
+                                Add Password
+                            </button>
+
                         </div>
 
-                        <div>
-                        <button className='flex text-white justify-center items-center gap-2 bg-orange-400 hover:bg-orange-300 rounded-full px-4 py-2 w-fit border-2 border-blue-200'>Add Password</button>
-                        </div>
-             
                     </div>
 
             </div>
