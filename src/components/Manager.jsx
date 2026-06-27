@@ -1,9 +1,27 @@
 import React from 'react'
-import { useRef } from 'react';
+import { useRef, useState, useEffect} from 'react';
 
 const Manager = () => { 
 
     const ref = useRef()
+    const [form, setform] = useState({site: "", username: "", password: ""})
+    const [passwordArray, setPasswordArray] = useState([])
+
+    useEffect(() => { 
+
+        let passwords = localStorage.getItem("passwords");
+        let passwordArray;
+
+        if (passwords) { 
+
+            setPasswordArray(JSON.parse("passwords"))
+        }
+        else {
+            passwordArray = []
+        }
+    }, [])
+
+    // showpass fn upon clicking the eye
     const showPassword = () => { 
 
         if(ref.current.src.includes("eye.png")) {
@@ -16,6 +34,21 @@ const Manager = () => {
             ref.current.src = 'eye.png'
         }
     }
+
+
+    const savePassword = () => {
+
+        setpasswordArray([...passwordArray, form])
+        localStorage.setItem("password", JSON.stringify([...passwordArray, form]))
+
+    }
+
+
+    const handleChange = (e) => { 
+
+        setform({...form, [e.target.name]: e.target.value})
+    }
+
 
     return ( 
 
@@ -32,31 +65,70 @@ const Manager = () => {
 
             <div className="flex flex-col p-4 text-black gap-6 item-center">
 
-
-                <input placeholder='Name' className='rounded-full border border-blue-500 w-full p-4 py-1' type="text" name="" id="" /> 
+            
+                <input value={form.site} onChange={handleChange} placeholder='Name' className='rounded-full border border-blue-500 w-full p-4 py-1' type="text" name="site" id="" /> 
 
                     <div className="flex w-full gap-6">
 
-                        <input placeholder='Description (optional)' className='rounded-full border border-blue-500 flex-1 p-4 py-1' type="text" name="" id="" />
+                        <input value={form.username} onChange={handleChange} placeholder='Description (optional)' className='rounded-full border border-blue-500 flex-1 p-4 py-1' type="text" name="username" id="" />
 
                         <div className="flex items-center gap-4 flex-shrink-0">
 
                             <div className="relative">
-                                <input placeholder='Enter your Password' className='rounded-full border border-blue-500 w-full p-4 py-1' type="text" name="" id="" />
+                                <input value={form.password} onChange={handleChange} placeholder='Enter your Password' className='rounded-full border border-blue-500 w-full p-4 py-1' type="text" name="password" id="" />
 
                                 <span className='absolute right-[3px] top-[4px] cursor-pointer' onClick={showPassword}>
                                     <img ref={ref} className='p-1' width={27} src='eye.png' alt="eye"/>
                                 </span>
                             </div>
 
-                            <button className='flex text-white justify-center items-center gap-2 bg-orange-400 hover:bg-orange-300 rounded-full px-4 py-2 w-fit border-2 border-blue-200'>
-                                Add Password
-                            </button>
 
                         </div>
 
                     </div>
 
+
+                    <button onClick={savePassword} className='flex text-white justify-center items-center gap-2 bg-orange-400 hover:bg-orange-300 rounded-full px-4 py-2 w-fit border-2 border-blue-200'>
+                        Add Password
+                    </button>
+
+            </div>
+
+            
+            <div className="passwords">
+                <h2>Your saved passwords</h2> 
+
+                <table className="table-auto w-full rounded-md overflow-hidden">
+                    <thread className='bg-blue-700 text-white'>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thread>
+
+                    <tbody className='bg-blue-100'>
+                        <tr>
+                            <td className='text-center w-32'></td>
+                            <td className='text-center w-32'></td>
+                            <td className='text-center w-32'></td>
+                        </tr>
+
+                         <tr>
+                            <td className='text-center w-32'></td>
+                            <td className='text-center w-32'></td>
+                            <td className='text-center w-32'></td>
+                        </tr>
+
+                         <tr>
+                            <td className='text-center w-32'></td>
+                            <td className='text-center w-32'></td>
+                            <td className='text-center w-32'></td>
+                        </tr>
+                    </tbody>
+
+
+                </table>
             </div>
 
 
