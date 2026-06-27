@@ -5,9 +5,11 @@ const Navbar = () => {
     return ( 
 
         // Navbar setup 
-        <nav className = 'bg-blue-200 flex justify-between items-center px-4 h-12'>
+        <nav className = 'bg-blue-300 text-white'>
 
-            <div className="logo font-bold">Vault Locker</div>
+            <div className="mycontainer flex justify-between items-center px-4 py-5 h-12">
+
+            <div className="logo font-bold text-2xl">Vault Locker</div>
 
             <ul>
                 <li className='flex gap-4'>
@@ -19,6 +21,8 @@ const Navbar = () => {
 
                 </li>
             </ul> 
+
+            </div>
 
         </nav>
     )
