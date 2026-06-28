@@ -22,6 +22,13 @@ const Manager = () => {
         }
     }, [])
 
+
+    // copy test function 
+    const copyText = (text) => { 
+
+        navigator.clipboard.writeText(text)
+    }
+
     // showpass fn upon clicking the eye
     const showPassword = () => { 
 
@@ -94,7 +101,7 @@ const Manager = () => {
 
 
                     <button onClick={savePassword} className='flex text-white justify-center items-center gap-2 bg-orange-400 hover:bg-orange-300 rounded-full px-4 py-2 w-fit border-2 border-blue-200'>
-                        Add Password
+                        Save Password
                     </button>
 
             </div>
@@ -112,6 +119,7 @@ const Manager = () => {
                             <th className='py-2'>Name</th>
                             <th className='py-2'>Description (optional)</th>
                             <th className='py-2'>Password</th>
+                            <th className='py-2'>Actions</th>
                         </tr>
                     </thread>
 
@@ -125,7 +133,7 @@ const Manager = () => {
                             <td className='py-2 border border-white text-center w-32'>{item.username}</td>
                             <td className='py-2 border border-white text-center w-32'>{item.password}
 
-                                <div className="size-7 cursor-pointer">
+                                <div className="pwcopy flex items-center justify-center size-7 cursor-pointer" onClick={()=>{copyText(item.password)}}>
 
                                 <span className='absolute right-[3px] top-[4px]'>
                                     <img className='p-1' width={5} src='cp.png' alt="copy"/> 
@@ -134,6 +142,36 @@ const Manager = () => {
                                 </div>
 
                             </td>
+
+                            <td className='justify-center py-2 border border-white text-center'>
+                                
+                                <span className='cursor-pointer mx-2'>
+
+                                    <button className="button" onClick={() => editPassword(item.id)}>
+                                      <svg className="svg-icon" fill="none" height={24} viewBox="0 0 24 24" width={24} xmlns="http://www.w3.org/2000/svg">
+                                        <g stroke="#a649da" strokeLinecap="round" strokeWidth={2}>
+                                          <path d="m20 20h-16" />
+                                          <path clipRule="evenodd" d="m14.5858 4.41422c.781-.78105 2.0474-.78105 2.8284 0 .7811.78105.7811 2.04738 0 2.82843l-8.28322 8.28325-3.03046.202.20203-3.0304z" fillRule="evenodd" />
+                                        </g>
+                                      </svg>
+                                      <span className="lable">Edit</span>
+                                    </button>
+
+                                </span>
+
+                                <span className='cursor-pointer mx-2'>
+
+                                    <button onClick={() => deletePassword(item.id)} className="inline-flex items-center px-4 py-2 bg-red-600 transition ease-in-out delay-75 hover:bg-red-700 text-white text-sm font-medium rounded-md hover:-translate-y-1 hover:scale-110">
+                                      <svg stroke="currentColor" viewBox="0 0 24 24" fill="none" className="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" strokeWidth={2} strokeLinejoin="round" strokeLinecap="round" />
+                                      </svg>
+                                      Delete
+                                    </button>
+
+                                </span>
+
+                            </td>
+
                         </tr>
 
                         })}
