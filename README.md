@@ -9,4 +9,5 @@ This is a simple password manager website.
 Background: https://bg.ibelick.com/
 Eye: https://www.flaticon.com/free-icon/view_709612
 Hidden Eye: https://www.flaticon.com/free-icon/hide_2767146
+Copy: https://www.flaticon.com/free-icon/clipboard_1103440
 ```

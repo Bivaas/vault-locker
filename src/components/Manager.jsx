@@ -4,6 +4,7 @@ import { useRef, useState, useEffect} from 'react';
 const Manager = () => { 
 
     const ref = useRef()
+    const passwordRef = useRef()
     const [form, setform] = useState({site: "", username: "", password: ""})
     const [passwordArray, setPasswordArray] = useState([])
 
@@ -14,7 +15,7 @@ const Manager = () => {
 
         if (passwords) { 
 
-            setPasswordArray(JSON.parse("passwords"))
+            setPasswordArray(JSON.parse(passwords))
         }
         else {
             passwordArray = []
@@ -24,21 +25,25 @@ const Manager = () => {
     // showpass fn upon clicking the eye
     const showPassword = () => { 
 
+        passwordRef.current.type = "text"
+
         if(ref.current.src.includes("eye.png")) {
 
             ref.current.src = 'hidden.png'
+            passwordRef.current.type = "password"
 
         }
         else {
 
             ref.current.src = 'eye.png'
+            passwordRef.current.type = "text"
         }
     }
 
 
     const savePassword = () => {
 
-        setpasswordArray([...passwordArray, form])
+        setPasswordArray([...passwordArray, form])
         localStorage.setItem("password", JSON.stringify([...passwordArray, form]))
 
     }
@@ -75,7 +80,7 @@ const Manager = () => {
                         <div className="flex items-center gap-4 flex-shrink-0">
 
                             <div className="relative">
-                                <input value={form.password} onChange={handleChange} placeholder='Enter your Password' className='rounded-full border border-blue-500 w-full p-4 py-1' type="text" name="password" id="" />
+                                <input ref={passwordRef} value={form.password} onChange={handleChange} placeholder='Enter your Password' className='rounded-full border border-blue-500 w-full p-4 py-1' type="password" name="password" id="" />
 
                                 <span className='absolute right-[3px] top-[4px] cursor-pointer' onClick={showPassword}>
                                     <img ref={ref} className='p-1' width={27} src='eye.png' alt="eye"/>
@@ -118,7 +123,17 @@ const Manager = () => {
 
                             <td className='py-2 border border-white text-center w-32'>{item.site}</td>
                             <td className='py-2 border border-white text-center w-32'>{item.username}</td>
-                            <td className='py-2 border border-white text-center w-32'>{item.password}</td>
+                            <td className='py-2 border border-white text-center w-32'>{item.password}
+
+                                <div className="size-7 cursor-pointer">
+
+                                <span className='absolute right-[3px] top-[4px]'>
+                                    <img className='p-1' width={5} src='cp.png' alt="copy"/> 
+                                </span>
+
+                                </div>
+
+                            </td>
                         </tr>
 
                         })}
