@@ -9,18 +9,16 @@ const Manager = () => {
     const [form, setform] = useState({site: "", username: "", password: ""})
     const [passwordArray, setPasswordArray] = useState([])
 
+    const getPasswords = async () => { 
+
+        let req = await fetch('${import.meta.env.VITE_API_URL}/')
+        let passwords = await req.json()
+        setPasswordArray(passwords)
+    }
+
     useEffect(() => { 
 
-        let passwords = localStorage.getItem("passwords");
-        let passwordArray;
-
-        if (passwords) { 
-
-            setPasswordArray(JSON.parse(passwords))
-        }
-        else {
-            passwordArray = []
-        }
+        getPasswords()
     }, [])
 
 
