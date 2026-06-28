@@ -88,7 +88,7 @@ const Manager = () => {
 
         <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]"></div>
 
-        <div className="mycontainer">
+        <div className="px-2 md:px-0 mycontainer">
 
             <h1 className="text-4xl text font-bold text-center">Vault Lock</h1>
             <p className='text-blue-800 text-lg text-center'>Secure means of storing passwords</p>
@@ -97,16 +97,16 @@ const Manager = () => {
             <div className="flex flex-col p-4 text-black gap-6 item-center">
 
             
-                <input value={form.site} onChange={handleChange} placeholder='Name' className='rounded-full border border-blue-500 w-full p-4 py-1' type="text" name="site" id="" /> 
+                <input value={form.site} onChange={handleChange} placeholder='Name' className='rounded-full border border-blue-500 w-full p-4 py-1' type="text" name="site" id="site" /> 
 
-                    <div className="flex w-full gap-6">
+                    <div className="flex flex-col md:flex-row w-full justify-between gap-6">
 
-                        <input value={form.username} onChange={handleChange} placeholder='Description (optional)' className='rounded-full border border-blue-500 flex-1 p-4 py-1' type="text" name="username" id="" />
+                        <input value={form.username} onChange={handleChange} placeholder='Description (optional)' className='rounded-full border border-blue-500 flex-1 p-4 py-1' type="text" name="username" id="username" />
 
                         <div className="flex items-center gap-4 flex-shrink-0">
 
                             <div className="relative">
-                                <input ref={passwordRef} value={form.password} onChange={handleChange} placeholder='Enter your Password' className='rounded-full border border-blue-500 w-full p-4 py-1' type="password" name="password" id="" />
+                                <input ref={passwordRef} value={form.password} onChange={handleChange} placeholder='Enter your Password' className='rounded-full border border-blue-500 w-full p-4 py-1' type="password" name="password" id="password" />
 
                                 <span className='absolute right-[3px] top-[4px] cursor-pointer' onClick={showPassword}>
                                     <img ref={ref} className='p-1' width={27} src='eye.png' alt="eye"/>
