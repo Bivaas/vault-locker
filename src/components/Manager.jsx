@@ -1,5 +1,6 @@
 import React from 'react'
 import { useRef, useState, useEffect} from 'react';
+import { v4 as uuidv4 } from 'uuid'; 
 
 const Manager = () => { 
 
@@ -50,9 +51,27 @@ const Manager = () => {
 
     const savePassword = () => {
 
-        setPasswordArray([...passwordArray, form])
-        localStorage.setItem("password", JSON.stringify([...passwordArray, form]))
+        setPasswordArray([...passwordArray, {...form, id: uuidv4()}])
+        localStorage.setItem("password", JSON.stringify([...passwordArray, {...form, id: uuidv4()}]))
+        setform({ site: "", username: "", password: "" })
 
+    }
+
+    const deletePassword = (id) => { 
+
+        let c = confirm("Confirm deletion ? ")
+        if (c) { 
+
+            setPasswordArray(passwordArray.filter(item=>item.id!==id))
+            localStorage.setItem("passwords", JSON.stringify(passwordArray.filter(item=>item.id!==id)))
+        }
+        
+    }
+
+    const editPassword = (id) => {
+
+        setform(passwordArray.filter(i=>i.id===id)[0])
+        setPasssswordArray(passwordArray.filter(item=>item.id!==id))
     }
 
 
@@ -145,7 +164,7 @@ const Manager = () => {
 
                             <td className='justify-center py-2 border border-white text-center'>
                                 
-                                <span className='cursor-pointer mx-2'>
+                                <span className='cursor-pointer mx-2' onClick={()=>{editPassword(item.id)}}>
 
                                     <button className="button" onClick={() => editPassword(item.id)}>
                                       <svg className="svg-icon" fill="none" height={24} viewBox="0 0 24 24" width={24} xmlns="http://www.w3.org/2000/svg">
@@ -159,7 +178,7 @@ const Manager = () => {
 
                                 </span>
 
-                                <span className='cursor-pointer mx-2'>
+                                <span className='cursor-pointer mx-2' onClick={()=>{deletePassword(item.id)}}>
 
                                     <button onClick={() => deletePassword(item.id)} className="inline-flex items-center px-4 py-2 bg-red-600 transition ease-in-out delay-75 hover:bg-red-700 text-white text-sm font-medium rounded-md hover:-translate-y-1 hover:scale-110">
                                       <svg stroke="currentColor" viewBox="0 0 24 24" fill="none" className="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg">
