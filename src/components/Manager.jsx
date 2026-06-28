@@ -96,39 +96,37 @@ const Manager = () => {
 
             
             <div className="passwords">
-                <h2>Your saved passwords</h2> 
+                <h2 className='font-bold text-2xl py-4'>Your saved passwords</h2> 
 
-                <table className="table-auto w-full rounded-md overflow-hidden">
+                {passwordArray.length === 0 && <div>Save some passwords first !</div>}
+
+                {passwordArray.length !=0 && <table className="table-auto w-full rounded-md overflow-hidden">
+
                     <thread className='bg-blue-700 text-white'>
                         <tr>
-                            <th></th>
-                            <th></th>
-                            <th></th>
+                            <th className='py-2'>Name</th>
+                            <th className='py-2'>Description (optional)</th>
+                            <th className='py-2'>Password</th>
                         </tr>
                     </thread>
 
                     <tbody className='bg-blue-100'>
-                        <tr>
-                            <td className='text-center w-32'></td>
-                            <td className='text-center w-32'></td>
-                            <td className='text-center w-32'></td>
+
+                        {passwordArray.map((item) => {
+
+                            return <tr key = {index}>
+
+                            <td className='py-2 border border-white text-center w-32'>{item.site}</td>
+                            <td className='py-2 border border-white text-center w-32'>{item.username}</td>
+                            <td className='py-2 border border-white text-center w-32'>{item.password}</td>
                         </tr>
 
-                         <tr>
-                            <td className='text-center w-32'></td>
-                            <td className='text-center w-32'></td>
-                            <td className='text-center w-32'></td>
-                        </tr>
+                        })}
 
-                         <tr>
-                            <td className='text-center w-32'></td>
-                            <td className='text-center w-32'></td>
-                            <td className='text-center w-32'></td>
-                        </tr>
                     </tbody>
 
 
-                </table>
+                </table>}
             </div>
 
 
