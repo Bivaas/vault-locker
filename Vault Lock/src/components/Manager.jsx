@@ -47,10 +47,10 @@ const Manager = () => {
     }
 
 
-    const savePassword = () => {
+    const savePassword = async () => {
 
         // getting new passwd by deleting old entry with this id 
-        await fetch('${import.meta.env.VITE_URL}/', { 
+        await fetch(`${import.meta.env.VITE_URL}/`, { 
 
             method: "DELETE",
             headers: { "Content-Type": "application/json" },
@@ -75,7 +75,7 @@ const Manager = () => {
     }
 
 
-    const deletePassword = (id) => { 
+    const deletePassword = async (id) => { 
 
         // confirm delete window (later ill setup with toast)
         let c = confirm("Confirm deletion ? ")
