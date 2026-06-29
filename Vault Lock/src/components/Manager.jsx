@@ -121,36 +121,33 @@ const Manager = () => {
             <p className='text-blue-800 text-lg text-center'>Secure means of storing passwords</p>
 
 
-            <div className="flex flex-col p-4 text-black gap-6 item-center">
-
-            
-                <input value={form.site} onChange={handleChange} placeholder='Name' className='rounded-full border border-blue-500 w-full p-4 py-1' type="text" name="site" id="site" /> 
 
                     <div className="flex flex-col md:flex-row w-full justify-between gap-6">
 
-                        <input value={form.username} onChange={handleChange} placeholder='Description (optional)' className='rounded-full border border-blue-500 flex-1 p-4 py-1' type="text" name="username" id="username" />
+                        <input value={form.site} onChange={handleChange} placeholder='Name' className='rounded-full border border-blue-500 flex-1 px-4 py-2 focus:outline-none' type="text" name="site" id="site" />
 
-                        <div className="flex items-center gap-4 flex-shrink-0">
+                        <input value={form.username} onChange={handleChange} placeholder='Description (optional)' className='rounded-full border border-blue-500 flex-1 px-4 py-2 focus:outline-none' type="text" name="username" />
 
-                            <div className="relative">
-                                <input ref={passwordRef} value={form.password} onChange={handleChange} placeholder='Enter your Password' className='rounded-full border border-blue-500 w-full p-4 py-1' type="password" name="password" id="password" />
+                    </div>
 
-                                <span className='absolute right-[3px] top-[4px] cursor-pointer' onClick={showPassword}>
-                                    <img ref={ref} className='p-1' width={27} src='eye.png' alt="eye"/>
-                                </span>
-                            </div>
+                    <div className="relative w-full">
 
+                        <input ref={passwordRef} value={form.password} onChange={handleChange} placeholder='Your precious password' className='rounded-full border border-blue-500 w-full px-4 py-2 focus:outline-none' type="password" name="password" id="password" />
 
-                        </div>
+                        <span className='absolute right-2 top-1/2 cursor-pointer' onClick={showPassword}>
+
+                            <img ref={ref} className='p-1' width={26} src='eye.png' alt="eye"/>
+
+                        </span>
 
                     </div>
 
 
-                    <button onClick={savePassword} className='flex text-white justify-center items-center gap-2 bg-orange-400 hover:bg-orange-300 rounded-full px-4 py-2 w-fit border-2 border-blue-200'>
+                    <button onClick={savePassword} className='flex text-white justify-center items-center gap-2 bg-orange-400 hover:bg-orange-500 rounded-full px-6 py-2 w-fit border-2 border-blue-200'>
                         Save Password
                     </button>
 
-            </div>
+            
 
             
             <div className="passwords">
@@ -177,13 +174,15 @@ const Manager = () => {
 
                             <td className='py-2 border border-white text-center w-32'>{item.site}</td>
                             <td className='py-2 border border-white text-center w-32'>{item.username}</td>
-                            <td className='py-2 border border-white text-center w-32'>{item.password}
 
-                                <div className="pwcopy flex items-center justify-center size-7 cursor-pointer" onClick={()=>{copyText(item.password)}}>
+                            <td className='py-2 border border-white text-center w-32'>
 
-                                <span className='absolute right-[3px] top-[4px]'>
-                                    <img className='p-1' width={5} src='cp.png' alt="copy"/> 
+                                <div className="flex items-center justify-center gap-2">
+
+                                <span>
+                                    {item.password}
                                 </span>
+                                    <img className='cursor-pointer' width={16} src='cp.png' alt="copy" onClick={()=>{copytext(item.password)}}/> 
 
                                 </div>
 
@@ -227,7 +226,6 @@ const Manager = () => {
 
                 </table>}
             </div>
-
 
         </div>
 

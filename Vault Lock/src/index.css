@@ -4,6 +4,7 @@
 
     .mycontainer { 
 
+        max-width: 60rem;
         width: 100%;
         margin-left: auto;
         margin-right: auto;
