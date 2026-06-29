@@ -11,7 +11,7 @@ const Manager = () => {
 
     const getPasswords = async () => { 
 
-        let req = await fetch('${import.meta.env.VITE_API_URL}/')
+        let req = await fetch(`${import.meta.env.VITE_URL}/`)
         let passwords = await req.json()
         setPasswordArray(passwords)
     }
@@ -49,20 +49,48 @@ const Manager = () => {
 
     const savePassword = () => {
 
+        // getting new passwd by deleting old entry with this id 
+        await fetch('${import.meta.env.VITE_URL}/', { 
+
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ id: form.id })
+
+        })
+
         const newPassword = { ...form, id: uuidv4() }
         setPasswordArray([...passwordArray, newPassword])
-        localStorage.setItem("passwords", JSON.stringify([...passwordArray, {...form, id: uuidv4()}]))
+
+
+        await fetch('${import.meta.env.VITE_URL}/', {
+
+            method: "POST",
+            headers: { "Content-Type": "application/json"},
+            body: JSON.stringify(newPassword)
+
+        })
+
         setform({ site: "", username: "", password: "" })
 
     }
 
+
     const deletePassword = (id) => { 
 
+        // confirm delete window (later ill setup with toast)
         let c = confirm("Confirm deletion ? ")
+        
         if (c) { 
 
-            setPasswordArray(passwordArray.filter(item=>item.id!==id))
-            localStorage.setItem("passwords", JSON.stringify(passwordArray.filter(item=>item.id!==id)))
+            setPasswordArray(passwordArray.filter(item => item.id !== id))
+
+            await fetch (`${import.meta.env.VITE_API_URL}/`, { 
+
+                method: "DELETE",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ id })
+            })
+
         }
         
     }
