@@ -6,7 +6,7 @@ const Manager = () => {
 
     const ref = useRef()
     const passwordRef = useRef()
-    const [form, setform] = useState({site: "", username: "", password: ""})
+    const [form, setform] = useState({name: "", description: "", password: ""})
     const [passwordArray, setPasswordArray] = useState([])
 
     const getPasswords = async () => { 
@@ -62,7 +62,7 @@ const Manager = () => {
         setPasswordArray([...passwordArray, newPassword])
 
 
-        await fetch('${import.meta.env.VITE_URL}/', {
+        await fetch(`${import.meta.env.VITE_URL}/`, {
 
             method: "POST",
             headers: { "Content-Type": "application/json"},
@@ -70,7 +70,7 @@ const Manager = () => {
 
         })
 
-        setform({ site: "", username: "", password: "" })
+        setform({ name: "", description: "", password: "" })
 
     }
 
@@ -84,7 +84,7 @@ const Manager = () => {
 
             setPasswordArray(passwordArray.filter(item => item.id !== id))
 
-            await fetch (`${import.meta.env.VITE_API_URL}/`, { 
+            await fetch (`${import.meta.env.VITE_URL}/`, { 
 
                 method: "DELETE",
                 headers: { "Content-Type": "application/json" },
@@ -118,15 +118,18 @@ const Manager = () => {
         <div className="px-2 md:px-0 mycontainer">
 
             <h1 className="text-4xl text font-bold text-center">Vault Lock</h1>
+
             <p className='text-blue-800 text-lg text-center'>Secure means of storing passwords</p>
 
+
+                <div className="flex flex-col gap-6 p-4">
 
 
                     <div className="flex flex-col md:flex-row w-full justify-between gap-6">
 
-                        <input value={form.site} onChange={handleChange} placeholder='Name' className='rounded-full border border-blue-500 flex-1 px-4 py-2 focus:outline-none' type="text" name="site" id="site" />
+                        <input value={form.name} onChange={handleChange} placeholder='Name' className='rounded-full border border-blue-500 flex-1 px-4 py-2 focus:outline-none' type="text" name="name" id="name" />
 
-                        <input value={form.username} onChange={handleChange} placeholder='Description (optional)' className='rounded-full border border-blue-500 flex-1 px-4 py-2 focus:outline-none' type="text" name="username" />
+                        <input value={form.description} onChange={handleChange} placeholder='Description (optional)' className='rounded-full border border-blue-500 flex-1 px-4 py-2 focus:outline-none' type="text" name="description" />
 
                     </div>
 
@@ -134,7 +137,7 @@ const Manager = () => {
 
                         <input ref={passwordRef} value={form.password} onChange={handleChange} placeholder='Your precious password' className='rounded-full border border-blue-500 w-full px-4 py-2 focus:outline-none' type="password" name="password" id="password" />
 
-                        <span className='absolute right-2 top-1/2 cursor-pointer' onClick={showPassword}>
+                        <span className='absolute right-2 top-1/4 cursor-pointer' onClick={showPassword}>
 
                             <img ref={ref} className='p-1' width={26} src='eye.png' alt="eye"/>
 
@@ -147,7 +150,9 @@ const Manager = () => {
                         Save Password
                     </button>
 
-            
+
+                </div>
+
 
             
             <div className="passwords">
@@ -172,8 +177,8 @@ const Manager = () => {
 
                             return <tr key = {index}>
 
-                            <td className='py-2 border border-white text-center w-32'>{item.site}</td>
-                            <td className='py-2 border border-white text-center w-32'>{item.username}</td>
+                            <td className='py-2 border border-white text-center w-32'>{item.name}</td>
+                            <td className='py-2 border border-white text-center w-32'>{item.description}</td>
 
                             <td className='py-2 border border-white text-center w-32'>
 
@@ -182,14 +187,17 @@ const Manager = () => {
                                 <span>
                                     {item.password}
                                 </span>
-                                    <img className='cursor-pointer' width={16} src='cp.png' alt="copy" onClick={()=>{copytext(item.password)}}/> 
+                                    <img className='cursor-pointer' width={16} src='cp.png' alt="copy" onClick={()=>{copyText(item.password)}}/> 
 
                                 </div>
 
                             </td>
 
-                            <td className='justify-center py-2 border border-white text-center'>
-                                
+                            <td className='jpy-2 border border-white'>
+
+                                <div className="flex items-center justify-center gap-2">
+
+                            
                                 <span className='cursor-pointer mx-2' onClick={()=>{editPassword(item.id)}}>
 
                                     <button className="button" onClick={() => editPassword(item.id)}>
@@ -204,9 +212,11 @@ const Manager = () => {
 
                                 </span>
 
+                                
+
                                 <span className='cursor-pointer mx-2' onClick={()=>{deletePassword(item.id)}}>
 
-                                    <button onClick={() => deletePassword(item.id)} className="inline-flex items-center px-4 py-2 bg-red-600 transition ease-in-out delay-75 hover:bg-red-700 text-white text-sm font-medium rounded-md hover:-translate-y-1 hover:scale-110">
+                                    <button onClick={() => deletePassword(item.id)} className="inline-flex items-center px-2 py-1 bg-red-600 transition ease-in-out delay-75 hover:bg-red-700 text-white text-sm font-medium rounded-md hover:-translate-y-1 hover:scale-110">
                                       <svg stroke="currentColor" viewBox="0 0 24 24" fill="none" className="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" strokeWidth={2} strokeLinejoin="round" strokeLinecap="round" />
                                       </svg>
@@ -214,6 +224,8 @@ const Manager = () => {
                                     </button>
 
                                 </span>
+
+                                </div>
 
                             </td>
 
