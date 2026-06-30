@@ -3,6 +3,8 @@ import { MongoClient } from 'mongodb'
 import cors from 'cors'
 import dotenv from 'dotenv'
 
+import { clerkMiddleware, getAuth } from '@clerk/express'
+
 // env setup
 dotenv.config()
 
@@ -19,6 +21,8 @@ const port = 3000
 app.use(express.json())
 app.use(cors({ origin: "https://vaultlocker.vercel.app"}))
 
+app.use (clerkMiddleware())
+
 
 // connection with client 
 client.connect()
@@ -26,14 +30,22 @@ client.connect()
 // get route for gettin passwords
 app.get('/', async (req, res) => { 
 
+   const { userId } = getAuth(req)
+
+    if (!userId) return res.status(401).json ({ error: "Sign in first !!" })
+
     const db = client.db(dbName)
     const collection = db.collection('passwords')
-    const findResult = await collection.find({}).toArray()
+    const findResult = await collection.find( { userId }).toArray()
     res.json(findResult)
+
 })
 
 // savin password
 app.post ('/', async (req, res) => { 
+
+    const { userId } = getAuth(req)
+    if (!userId) return res.status(401).json({ error: "Sign in first !!" })
 
     const password = req.body
     const db = client.db(dbName)
@@ -46,6 +58,9 @@ app.post ('/', async (req, res) => {
 
 // passwd delete using uuid 
 app.delete ('/', async (req, res) => { 
+    
+    const { userId } = getAuth(req)
+    if (!userId) return res.status(401).json({ error: "Sign in first !! "})
 
     const password = req.body
     const db = client.db(dbName)

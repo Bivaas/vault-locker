@@ -7,19 +7,23 @@ Eg: Name: Hacker12, Description: my second google acc, password: topsecret-pass
 
 # Motivation
 
-I just thought of exploring react + vite project along with mongoDB. The skill that I learned in this project was that I need to think as a regular user and think of how they uses instead of adding features and making the site just "work"
+I just thought of exploring react + vite project along with mongoDB. The skill that I learned in this project was that I need to think as a regular user and think of how they uses instead of adding features and making the site just "work". In future, after the project is fully done, I plan to use it for storing regular password or other non sensitive credentials.
 
 # Use of AI
 
-I have used AI for debugging most of my API calls and to fix some div issues in Manager compoment (frontend). The actual code were written by me myself but I've asked some feedbacks, improvements with AI and implemented it in my project. 
+I have used AI for debugging most of my API calls and to fix some div issues in Manager compoment (frontend) and UI fixes + suggestion. The actual code were written by me myself but I've asked some feedbacks, improvements with AI and implemented it in my project. 
 
 # Tech Used
 
-I've used react + vite and tailwind CSS. In the backend dir, I have used express as framework / library for backend. For database, I've used mongoDB to store user's credentials and their valuable items. 
+I've used react + vite and tailwind CSS. 
+In the backend dir, I have used express as framework / library for backend.
+For database, I've used mongoDB to store user's credentials and their valuable items. 
+For auth, I have used clerk with development mode (because production requires a domain and I dont have one, sadly)
 
 # Next future Improvements
 
-I will be using encryption for password since nobody wants to store their pass in unencrypted pass manager. I also plan to use auth with clerk probably so I can see who sign up into my website :D (jk)
+I will be using encryption for password since nobody wants to store their pass in unencrypted pass manager.
+also, to make the UI little bit better.
 
 # Assets
 
