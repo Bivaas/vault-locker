@@ -4,6 +4,9 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { useAuth } from '@clerk/clerk-react';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const Manager = () => { 
 
     const ref = useRef()
@@ -87,15 +90,15 @@ const Manager = () => {
 
         setform({ name: "", description: "", password: "" })
 
+        toast.success('Password saved !!')
+
     }
 
 
     const deletePassword = async (id) => { 
 
         // confirm delete window (later ill setup with toast)
-        let c = confirm("Confirm deletion ? ")
         
-        if (c) { 
 
             setPasswordArray(passwordArray.filter(item => item.id !== id))
             
@@ -109,7 +112,7 @@ const Manager = () => {
                 body: JSON.stringify({ id })
             })
 
-        }
+        toast.success ('Password deleted !!')
         
     }
 
@@ -117,6 +120,8 @@ const Manager = () => {
 
         setform(passwordArray.filter(i=>i.id===id)[0])
         setPasswordArray(passwordArray.filter(item=>item.id!==id))
+
+        toast.info ('Editing...')
     }
 
 
@@ -128,8 +133,10 @@ const Manager = () => {
 
     return ( 
 
-        // background setup and main area
+        // background setup and main area and toast 
         <>
+
+        <ToastContainer position="top-right" autoClose={2000} theme="colored" />
 
         <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]"></div>
 

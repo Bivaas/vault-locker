@@ -19,6 +19,8 @@ I've used react + vite and tailwind CSS.
 In the backend dir, I have used express as framework / library for backend.
 For database, I've used mongoDB to store user's credentials and their valuable items. 
 For auth, I have used clerk with development mode (because production requires a domain and I dont have one, sadly)
+uuid for password seperation and recognition between diff users
+react-toastify for making notifications better
 
 # Next future Improvements
 
