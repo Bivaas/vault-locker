@@ -225,7 +225,7 @@ const Manager = () => {
                             <th className='py-2'>Name</th>
                             <th className='py-2'>Description (optional)</th>
                             <th className='py-2'>Password</th>
-                            <th className='py-2'>Actions</th>
+                            <th className='py-2'>Manage</th>
                         </tr>
                     </thead>
 
