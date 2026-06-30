@@ -1,6 +1,6 @@
 # Vault Locker 
 
-This is a simple password manager website. You can store your precious password in this website by classifying it as Name, description, actual password. 
+This is a simple password manager website. You can store your precious password in this website by classifying it as Name, description and actual password. 
 ``` 
 Eg: Name: Hacker12, Description: my second google acc, password: topsecret-pass 
 ```
