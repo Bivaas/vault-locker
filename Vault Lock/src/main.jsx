@@ -12,11 +12,11 @@ createRoot (document.getElementById('root')).render (
 
   <StrictMode>
 
-    <CLerkProvider publishableKey={PUBLISHABLE_KEY}>
+    <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
 
       <App />
 
-    </CLerkProvider>
+    </ClerkProvider>
   </StrictMode>,
 
 )

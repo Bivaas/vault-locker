@@ -1,4 +1,5 @@
 import React from 'react'
+import { UserButton } from '@clerk/clerk-react'
 
 const Navbar = () => { 
 
@@ -15,6 +16,7 @@ const Navbar = () => {
                 <li className='flex gap-4'>
 
                     <a className='hover:font-bold' href='/'>:)</a>
+                    <UserButton/>
 
 
                 </li>

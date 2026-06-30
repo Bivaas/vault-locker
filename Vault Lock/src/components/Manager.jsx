@@ -2,6 +2,8 @@ import React from 'react'
 import { useRef, useState, useEffect} from 'react';
 import { v4 as uuidv4 } from 'uuid'; 
 
+import { useAuth } from '@clerk/clerk-react';
+
 const Manager = () => { 
 
     const ref = useRef()
@@ -9,9 +11,19 @@ const Manager = () => {
     const [form, setform] = useState({name: "", description: "", password: ""})
     const [passwordArray, setPasswordArray] = useState([])
 
+    const { getToken } = useAuth()
+
     const getPasswords = async () => { 
 
-        let req = await fetch(`${import.meta.env.VITE_URL}/`)
+        // token attached for unique pass per usr
+        const token = await getToken()
+
+        let req = await fetch(`${import.meta.env.VITE_URL}/`, {
+
+            headers: { "Authorization": `Bearer ${token}` }
+        })
+
+
         let passwords = await req.json()
         setPasswordArray(passwords)
     }
@@ -49,11 +61,14 @@ const Manager = () => {
 
     const savePassword = async () => {
 
+        // same token attachment for unique pass save
+        const token = await getToken()
+
         // getting new passwd by deleting old entry with this id 
         await fetch(`${import.meta.env.VITE_URL}/`, { 
 
             method: "DELETE",
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
             body: JSON.stringify({ id: form.id })
 
         })
@@ -65,7 +80,7 @@ const Manager = () => {
         await fetch(`${import.meta.env.VITE_URL}/`, {
 
             method: "POST",
-            headers: { "Content-Type": "application/json"},
+            headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
             body: JSON.stringify(newPassword)
 
         })
@@ -83,11 +98,14 @@ const Manager = () => {
         if (c) { 
 
             setPasswordArray(passwordArray.filter(item => item.id !== id))
+            
+            // same token for per usr pass deletion
+            const token = await getToken()
 
             await fetch (`${import.meta.env.VITE_URL}/`, { 
 
                 method: "DELETE",
-                headers: { "Content-Type": "application/json" },
+                headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
                 body: JSON.stringify({ id })
             })
 

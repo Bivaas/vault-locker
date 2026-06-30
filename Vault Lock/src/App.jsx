@@ -27,7 +27,7 @@ function App() {
 
                     <SignInButton mode="modal">
 
-                    <button className="bg-orange-500 hover:bg-orange-700 text-white rounded-full px-6 py-2">
+                    <button className="bg-orange-700 hover:bg-green-700 text-white rounded-full px-6 py-2">
                         Sign In
                     </button>
 
