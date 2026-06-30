@@ -95,26 +95,59 @@ const Manager = () => {
     }
 
 
-    const deletePassword = async (id) => { 
+    // confirmation for delete btn 
+    const confirmDelete = async (id) => { 
 
-        // confirm delete window (later ill setup with toast)
+        setPasswordArray(passwordArray.filter(item => item.id !== id))
+
+        const token = await getToken()
+
+        await fetch (`${import.meta.env.VITE_URL}/`, {
+
+            method: "DELETE",
+            headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
+            body: JSON.stringify ({ id })
+
+        })
+
+        toast.success('Password deleted !!')
+    }
+
+
+    const deletePassword = (id) => { 
         
+        toast(
+            <div>
 
-            setPasswordArray(passwordArray.filter(item => item.id !== id))
-            
-            // same token for per usr pass deletion
-            const token = await getToken()
+                <p className="mb-2">Confirm delete !!</p>
 
-            await fetch (`${import.meta.env.VITE_URL}/`, { 
+                <div className="flex gap-2">
 
-                method: "DELETE",
-                headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
-                body: JSON.stringify({ id })
-            })
+                    <button 
+                        onClick={() => { confirmDelete(id); toast.dismiss() }}
+                        className="bg-red-600 text-white px-3 py-1 rounded"
+                    >
+                        Yes 
+                    </button>
 
-        toast.success ('Password deleted !!')
+                    <button
+                        onClick={() => toast.dismiss()}
+                        className="bg-gray-400 text-white px-3 py-1 rounded"
+                    >
+                        No
+                    </button>
+
+                </div>
+            </div>,
+
+            { autoClose: false, closeOnClick: false }
+
+        )
+           
         
     }
+
+
 
     const editPassword = (id) => {
 
