@@ -17,7 +17,7 @@ const port = 3000
 
 
 app.use(express.json())
-app.use(cors())
+app.use(cors({ origin: "https://vaultlocker.vercel.app/"}))
 
 // connection with client 
 client.connect()
@@ -54,9 +54,13 @@ app.delete ('/', async (req, res) => {
 
 })
 
-app.listen (port, () => { 
 
-    console.log('Listening on port ${port}')
-})
+if (process.env.NOTE_ENV !== 'production') {
 
+    app.listen(port, () => { 
 
+        console.log(`Listening on ${port}`)
+    })
+}
+
+export default app
