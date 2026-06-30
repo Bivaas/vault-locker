@@ -17,7 +17,8 @@ const port = 3000
 
 
 app.use(express.json())
-app.use(cors({ origin: "https://vaultlocker.vercel.app/"}))
+app.use(cors({ origin: "https://vaultlocker.vercel.app"}))
+
 
 // connection with client 
 client.connect()
