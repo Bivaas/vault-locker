@@ -47,7 +47,7 @@ app.post ('/', async (req, res) => {
     const { userId } = getAuth(req)
     if (!userId) return res.status(401).json({ error: "Sign in first !!" })
 
-    const password = req.body
+    const password = {...req.body, userId }
     const db = client.db(dbName)
     const collection = db.collection('passwords')
     const findResult = await collection.insertOne(password)
@@ -62,10 +62,10 @@ app.delete ('/', async (req, res) => {
     const { userId } = getAuth(req)
     if (!userId) return res.status(401).json({ error: "Sign in first !! "})
 
-    const password = req.body
     const db = client.db(dbName)
     const collection = db.collection('passwords')
-    const findResult = await collection.deleteOne(password)
+    const findResult = await collection.deleteOne({ id: req.body.id, userId })
+
     res.send({ success: true, result: findResult })
 
 })
