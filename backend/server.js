@@ -29,7 +29,7 @@ app.get('/', async (req, res) => {
     const db = client.db(dbName)
     const collection = db.collection('passwords')
     const findResult = await collection.find({}).toArray()
-    res.json(findResault)
+    res.json(findResult)
 })
 
 // savin password
@@ -56,7 +56,7 @@ app.delete ('/', async (req, res) => {
 })
 
 
-if (process.env.NOTE_ENV !== 'production') {
+if (process.env.NODE_ENV !== 'production') {
 
     app.listen(port, () => { 
 
