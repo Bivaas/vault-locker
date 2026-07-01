@@ -241,10 +241,10 @@ const Manager = () => {
 
                     <thead className='bg-blue-700 text-white'>
                         <tr>
-                            <th className='py-2'>Name</th>
-                            <th className='py-2'>Description (optional)</th>
+                            <th className='py-2 w-40'>Name</th>
+                            <th className='py-2 w-40'>Description (optional)</th>
                             <th className='py-2'>Password</th>
-                            <th className='py-2'>Manage</th>
+                            <th className='py-2 w-24'>Manage</th>
                         </tr>
                     </thead>
 
@@ -254,10 +254,10 @@ const Manager = () => {
 
                             return <tr key = {index} className="even:bg-blue-50">
 
-                            <td className='py-2 border border-white text-center w-32'>{item.name}</td>
-                            <td className='py-2 border border-white text-center w-32'>{item.description}</td>
+                            <td className='py-2 border border-white text-center w-40'>{item.name}</td>
+                            <td className='py-2 border border-white text-center w-40'>{item.description}</td>
 
-                            <td className='py-2 border border-white text-center w-32'>
+                            <td className='py-2 border border-white text-center w-64'>
 
                                 <div className="flex items-center justify-center gap-2">
 
