@@ -233,7 +233,7 @@ const Manager = () => {
 
                         {passwordArray.map((item, index) => {
 
-                            return <tr key = {index}>
+                            return <tr key = {index} classNam="even:bg-blue-50">
 
                             <td className='py-2 border border-white text-center w-32'>{item.name}</td>
                             <td className='py-2 border border-white text-center w-32'>{item.description}</td>
@@ -251,7 +251,7 @@ const Manager = () => {
 
                             </td>
 
-                            <td className='jpy-2 border border-white'>
+                            <td className='py-3 border border-white'>
 
                                 <div className="flex items-center justify-center gap-2">
 

@@ -36,6 +36,7 @@ Hidden : https://www.flaticon.com/free-icon/hide_2767146
 Copy: https://www.flaticon.com/free-icon/clipboard_1103440
 Edit: https://uiverse.io/andrew-demchenk0/pretty-squid-78
 Delete: https://uiverse.io/seyed-mohsen-mousavi/warm-dingo-23
+Lock(favicon): https://www.flaticon.com/free-icon/locked_10464776
 ```
 
 ## Thank you :)
