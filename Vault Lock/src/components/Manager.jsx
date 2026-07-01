@@ -14,6 +14,8 @@ const Manager = () => {
     const [form, setform] = useState({name: "", description: "", password: ""})
     const [passwordArray, setPasswordArray] = useState([])
 
+    // make pass invisible :) 
+    const [visible, setVisible] = useState({})
     const { getToken } = useAuth()
 
     const getPasswords = async () => { 
@@ -37,11 +39,19 @@ const Manager = () => {
     }, [])
 
 
-    // copy test function 
+    // copy text function 
     const copyText = (text) => { 
 
         navigator.clipboard.writeText(text)
+        toast.success("Copied !!")
     }
+
+    // to englighten user with their password
+    const toggleVisible = (id) => { 
+
+        setVisible ({ ...visible, [id]: !visible[id] })
+    }
+
 
     // showpass fn upon clicking the eye
     const showPassword = () => { 
@@ -243,9 +253,11 @@ const Manager = () => {
                                 <div className="flex items-center justify-center gap-2">
 
                                 <span>
-                                    {item.password}
+                                    {visible[item.id] ? item.password : '•'.repeat(item.password.length)}
                                 </span>
-                                    <img className='cursor-pointer' width={16} src='cp.png' alt="copy" onClick={()=>{copyText(item.password)}}/> 
+                                    <img className='cursor-pointer' width={16} src={visible[item.id] ? 'eye.png' : 'hidden.png' } alt="show/hide" onClick={()=>{toggleVisible(item.id)}} /> 
+
+                                    <img className='cursor-pointer' width={16} src='cp.png' alt="copy" onClick={() => {copyText(item.password)}} />
 
                                 </div>
 
