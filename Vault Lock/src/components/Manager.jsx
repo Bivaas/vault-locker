@@ -250,9 +250,9 @@ const Manager = () => {
 
                     <tbody className='bg-blue-100'>
 
-                        {passwordArray.filter((item) => item.name.toLowerCase().includes(search.toLowercase())).map((item, index) => {
+                        {passwordArray.filter((item) => item.name.toLowerCase().includes(search.toLowerCase())).map((item, index) => {
 
-                            return <tr key = {index} classNam="even:bg-blue-50">
+                            return <tr key = {index} className="even:bg-blue-50">
 
                             <td className='py-2 border border-white text-center w-32'>{item.name}</td>
                             <td className='py-2 border border-white text-center w-32'>{item.description}</td>
