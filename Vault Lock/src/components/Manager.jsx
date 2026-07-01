@@ -16,6 +16,7 @@ const Manager = () => {
 
     // make pass invisible :) 
     const [visible, setVisible] = useState({})
+    const [search, setSearch ] = useState("")
     const { getToken } = useAuth()
 
     const getPasswords = async () => { 
@@ -226,6 +227,14 @@ const Manager = () => {
             <div className="passwords">
                 <h2 className='font-bold text-2xl py-4'>Your saved passwords</h2> 
 
+                <input 
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Search with name...."
+                className='rounded-full border border-blue-500 w-full px-4 py-2 mb-4 focus:outline-none'
+                type="text"
+                />
+
                 {passwordArray.length === 0 && <div>Save some passwords first !</div>}
 
                 {passwordArray.length !=0 && <table className="table-auto w-full rounded-md overflow-hidden">
@@ -241,7 +250,7 @@ const Manager = () => {
 
                     <tbody className='bg-blue-100'>
 
-                        {passwordArray.map((item, index) => {
+                        {passwordArray.filter((item) => item.name.toLoverCase().includes(search.toLowercase())).map((item, index) => {
 
                             return <tr key = {index} classNam="even:bg-blue-50">
 
