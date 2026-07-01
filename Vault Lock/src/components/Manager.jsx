@@ -250,7 +250,7 @@ const Manager = () => {
 
                     <tbody className='bg-blue-100'>
 
-                        {passwordArray.filter((item) => item.name.toLoverCase().includes(search.toLowercase())).map((item, index) => {
+                        {passwordArray.filter((item) => item.name.toLowerCase().includes(search.toLowercase())).map((item, index) => {
 
                             return <tr key = {index} classNam="even:bg-blue-50">
 
